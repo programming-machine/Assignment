@@ -1,8 +1,11 @@
 #define MAX_LIMIT 20000 
+
+#define MAX_LIMIT_WORDS 20000 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h> 
 
 
 struct Node
@@ -13,12 +16,16 @@ struct Node
 };  
 
 //struct Node node[10];
- struct Node node[10];
+ struct Node node[MAX_LIMIT_WORDS];
 
 
 struct Node * createLinekdList(char str[]);
 int countWords (char str[]);
 void printList(struct Node* head);
+void bubbleSort(struct Node *start);
+void swap(struct Node *a, struct Node *b);
+
+
 
 struct Node * SortLinekdList(struct Node* head);
 
@@ -35,6 +42,9 @@ int main ()
 
    struct Node* root = createLinekdList(str);
 
+   //printList(root);
+   
+   bubbleSort(root);
    printList(root);
 
     return 0;
@@ -153,6 +163,7 @@ void printList(struct Node* head)
 
 		curr = curr->next;
 	}
+    printf( "\n\n");
 	printf("NULL");
 }
 
@@ -197,3 +208,52 @@ struct Node * SortLinekdList(struct Node* head )
 
 
 }
+
+
+
+
+
+void bubbleSort(struct Node *start) 
+{ 
+    int swapped, i; 
+    struct Node *ptr1; 
+    struct Node *lptr = NULL; 
+
+  
+    /* Checking for empty list */
+    if (start == NULL) 
+        return; 
+  
+    do
+    { 
+        swapped = 0; 
+        ptr1 = start; 
+  
+        while (ptr1->next != lptr) 
+        { 
+
+            if (toupper(ptr1->first_four_digits[0])  > toupper(ptr1->next->first_four_digits[0])  )
+            {
+                swap(ptr1, ptr1->next); 
+                swapped = 1;
+            }
+            ptr1 = ptr1->next; 
+        } 
+        lptr = ptr1; 
+    } 
+    while (swapped); 
+} 
+  
+/* function to swap data of two nodes a and b*/
+void swap(struct Node *a, struct Node *b) 
+{ 
+    int tempLength = a->length; 
+    a->length = b->length; 
+    b->length = tempLength;
+
+    char tempDigits [5];  
+    strcpy(tempDigits, a->first_four_digits);
+    strcpy(a->first_four_digits, b->first_four_digits);
+    strcpy(b->first_four_digits, tempDigits);
+ 
+} 
