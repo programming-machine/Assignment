@@ -20,6 +20,7 @@ struct Node * createLinekdList(char str[]);
 int countWords (char str[]);
 void printList(struct Node* head);
 
+struct Node * SortLinekdList(struct Node* head);
 
 
 
@@ -152,4 +153,46 @@ void printList(struct Node* head)
 		curr = curr->next;
 	}
 	printf("NULL");
+}
+
+
+
+struct Node * SortLinekdList(struct Node* head )
+{
+    int first = 0;
+    int second = 0;
+    int third = 0;
+    int fourth = 0; 
+    int lowest = 0;
+
+    struct Node* curr = head;
+
+    struct Node temp;
+
+   while (curr)
+	{
+		
+        //printf("%s -> ", curr->first_four_digits);
+        
+        first = curr->first_four_digits[0];
+        lowest = first;
+        curr = curr->next; 
+        while (curr)
+        {
+          curr = curr->next;
+          if (lowest > curr->first_four_digits[0])
+          {
+            lowest = curr->first_four_digits[0];
+            temp.length = curr->length;
+            strcpy(temp.first_four_digits ,curr -> first_four_digits); 
+          }
+        }
+
+       
+    curr = curr->next;
+		
+	}
+	printf("NULL");
+
+
 }
