@@ -149,7 +149,8 @@ void printList(struct Node* head)
     while (curr)
 	{
 		
-        printf("%s -> ", curr->first_four_digits);
+                printf("%s %d -> ", curr->first_four_digits , curr->length);
+
 		curr = curr->next;
 	}
 	printf("NULL");
